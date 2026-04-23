@@ -32,7 +32,7 @@ export default function Playground() {
         </motion.div>
 
         <motion.div
-          className="mt-8"
+          className="my-8"
           initial={{ opacity: 0, y: 18 }}
           animate={done ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
           transition={{
