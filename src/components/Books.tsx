@@ -28,17 +28,17 @@ const books: BookItem[] = [
     href: "https://www.goodreads.com/book/show/61439040-1984",
   },
   {
-    title: "Japanese Design Since 1945",
-    author: "Naomi Pollock",
-    coverSrc: "https://m.media-amazon.com/images/I/91pN7VLvTDL.jpg",
-    href: "https://www.goodreads.com/en/book/show/51075323-japanese-design-since-1945",
-  },
-  {
     title: "White Nights",
     author: "Fyodor Dostoevsky",
     coverSrc:
       "https://m.media-amazon.com/images/I/41y8H3QmVqL._AC_UF1000,1000_QL80_.jpg",
     href: "https://www.goodreads.com/book/show/1772910.White_Nights",
+  },
+  {
+    title: "Japanese Design Since 1945",
+    author: "Naomi Pollock",
+    coverSrc: "https://m.media-amazon.com/images/I/91pN7VLvTDL.jpg",
+    href: "https://www.goodreads.com/en/book/show/51075323-japanese-design-since-1945",
   },
   {
     title: "Hamlet",

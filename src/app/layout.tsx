@@ -47,6 +47,8 @@ export default function RootLayout({
               followDistance={
                 globalConfig.playfulUi.onekoFollower.followDistance
               }
+              bubbleChance={0}
+              bubbleEnabled={false}
             />
           ) : null}
         </ThemeProvider>
