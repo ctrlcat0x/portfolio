@@ -24,11 +24,26 @@ export default function LenisProvider({
     }
 
     lenisRef.current = lenis;
+    // expose lenis instance for other components (e.g., TOC smooth scroll)
+    try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      (window as any).__lenis = lenis;
+    } catch {
+      /* ignore */
+    }
+
     requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
       lenisRef.current = null;
+      try {
+        // @ts-ignore
+        delete (window as any).__lenis;
+      } catch {
+        /* ignore */
+      }
     };
   }, []);
 

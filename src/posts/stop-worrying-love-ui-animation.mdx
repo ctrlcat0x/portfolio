@@ -1,0 +1,132 @@
+---
+title: "How I Learned to Stop Worrying and Love UI Animation"
+date: "April 2026"
+description: "Seven practical ideas that changed how I design motion in interfaces."
+---
+
+Early in my career I believed animation was a talent you either had or you didn't. Polished interfaces felt like sorcery.
+
+That was nonsense. Good animation is deliberate, explainable, and reproducible. Below are seven practical ideas I use when designing motion. Each idea is small, but together they change how an interface feels.
+
+---
+
+## Start from Scale(0.93), Not Zero
+
+Animating from `scale(0)` breaks physical intuition — things don't materialize from nothing. Start slightly above zero (0.93+) so elements feel like they unfold.
+
+```css
+.dropdown {
+  transform: scale(0.93);
+  opacity: 0;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease-out;
+}
+
+.dropdown.open {
+  transform: scale(1);
+  opacity: 1;
+}
+```
+
+<PreviewBlock caption="Toggles using a 0.93 -> 1 scale make transitions feel natural.">
+  <ScaleDemo />
+</PreviewBlock>
+
+---
+
+## Give Buttons a Pulse
+
+Tiny, immediate feedback turns a dead click into a conversation. A quick scale-down on `:active` is the simplest and most effective pattern.
+
+```css
+.button:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease-out;
+}
+```
+
+<PreviewBlock caption="Buttons should answer back — even subtly.">
+  <ButtonPulseDemo />
+</PreviewBlock>
+
+---
+
+## Easing Is the Whole Game
+
+Duration sets the tempo, easing gives it character. For entry/exit, prefer `ease-out` or a custom cubic that gives energy. Compare `ease-in` (feels slow) with a punchy cubic curve.
+
+```css
+.dropdown-wrong {
+  transition: transform 0.3s ease-in;
+}
+.dropdown-right {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+```
+
+<PreviewBlock caption="Compare easing choices — the right curve changes perceived speed.">
+  <EasingDemo />
+</PreviewBlock>
+
+---
+
+## Popovers Should Know Where They Came From
+
+Set `transform-origin` to the trigger so popovers grow from their source. This small detail aligns motion with spatial intent and reads correctly to the eye.
+
+```css
+.popover {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+}
+```
+
+<PreviewBlock caption="A popover that grows from its trigger feels grounded.">
+  <PopoverDemo />
+</PreviewBlock>
+
+---
+
+## Tooltips Should Remember You Are Hovering
+
+Delay on first appearance prevents accidental triggers; once a tooltip is open, subsequent hovers should be instant.
+
+```css
+.tooltip[data-instant] {
+  transition-duration: 0ms;
+}
+```
+
+<PreviewBlock caption="Tooltips that adapt to context feel smarter.">
+  <TooltipDemo />
+</PreviewBlock>
+
+---
+
+## Blur Fixes What Other Properties Cannot
+
+When transitions feel stiff, a subtle blur during the state change can create perceived continuity. Use sparingly.
+
+```css
+.button-transition {
+  transition:
+    transform 0.2s ease-out,
+    opacity 0.2s ease-out,
+    filter 0.2s ease-out;
+}
+.button-transition.changing {
+  filter: blur(2px);
+}
+```
+
+<PreviewBlock caption="A delicate blur can bridge visual gaps between states.">
+  <BlurDemo />
+</PreviewBlock>
+
+---
+
+## What This All Means
+
+Animation is not decoration. It is a form of feedback and spatial reasoning. These patterns — start from non-zero scale, pick expressive easings, make UI answer back — are small, repeatable choices that compound into a design that feels alive.
+
+Start noticing how interfaces move, not only where they end up.

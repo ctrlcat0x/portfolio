@@ -263,11 +263,58 @@
   background-color: var(--accent);
 }
 
-/* ─── Shiki dual-theme: activate dark tokens in dark mode ─────────────────── */
-.dark .shiki,
+/* ─── Shiki: dual-theme code syntax highlighting ─────────────────────── */
+.shiki {
+  background: transparent !important;
+  color: var(--foreground);
+}
+
+.shiki code {
+  background: transparent !important;
+}
+
+.shiki span {
+  background: transparent !important;
+}
+
+/* Light theme: use shiki github-light tokens */
+.shiki {
+  color: var(--shiki-light);
+}
+
+/* Dark theme: swap to dark tokens and set container bg */
+.dark .shiki {
+  background-color: var(--card) !important;
+  color: var(--shiki-dark);
+}
+
 .dark .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark);
+  background: transparent !important;
+}
+
+/* Remove any per-line backgrounds but allow shiki tokens */
+.shiki .line {
+  background-color: transparent !important;
+}
+
+.shiki .line.highlighted {
+  background-color: rgba(16, 24, 40, 0.03) !important;
+}
+
+.dark .shiki .line.highlighted {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Subtle selection in code */
+.shiki ::selection {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: inherit;
+}
+
+.dark .shiki ::selection {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: inherit;
 }
 
 /* ─── Blog prose styles ───────────────────────────────────────────────────── */

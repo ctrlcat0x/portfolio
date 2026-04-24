@@ -9,6 +9,12 @@ import BlogDetailHeader from "@/components/blog/BlogDetailHeader";
 import BlogReveal from "@/components/blog/BlogReveal";
 import CodeBlock from "@/components/blog/CodeBlock";
 import PreviewBlock from "@/components/blog/PreviewBlock";
+import ScaleDemo from "@/components/blog/demos/ScaleDemo";
+import ButtonPulseDemo from "@/components/blog/demos/ButtonPulseDemo";
+import EasingDemo from "@/components/blog/demos/EasingDemo";
+import PopoverDemo from "@/components/blog/demos/PopoverDemo";
+import TooltipDemo from "@/components/blog/demos/TooltipDemo";
+import BlurDemo from "@/components/blog/demos/BlurDemo";
 
 // ─── Pre override ────────────────────────────────────────────────────────────
 // MDX renders fenced code blocks as <pre><code className="language-xxx">…</code></pre>.
@@ -34,6 +40,12 @@ function BlogPre({ children }: { children?: React.ReactNode }) {
 const mdxComponents = {
   pre: BlogPre,
   PreviewBlock,
+  ScaleDemo,
+  ButtonPulseDemo,
+  EasingDemo,
+  PopoverDemo,
+  TooltipDemo,
+  BlurDemo,
 };
 
 // ─── Static params ────────────────────────────────────────────────────────────

@@ -15,8 +15,8 @@ export default async function CodeBlock({
     html = await codeToHtml(code, {
       lang: language,
       themes: {
-        light: "github-light",
-        dark: "github-dark-dimmed",
+        light: "ayu-light",
+        dark: "ayu-dark",
       },
     });
   } catch {

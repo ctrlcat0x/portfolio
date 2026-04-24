@@ -7,6 +7,8 @@ const POSTS_DIR = path.join(process.cwd(), "src/posts");
 export interface TocItem {
   id: string;
   label: string;
+  /** heading level (2 for `##`, 3 for `###`) */
+  level?: number;
 }
 
 export interface PostMeta {
@@ -36,10 +38,14 @@ function slugify(text: string): string {
 function extractToc(content: string): TocItem[] {
   const items: TocItem[] = [];
   for (const line of content.split("\n")) {
-    const match = line.match(/^##\s+(.+)$/);
+    // match headings level 2 and 3, strip leading/trailing whitespace
+    const trimmedLine = line.trim();
+    const match = trimmedLine.match(/^(#{2})\s+(.+)$/);
     if (match) {
-      const label = match[1].trim();
-      items.push({ id: slugify(label), label });
+      const hashes = match[1];
+      const label = match[2].trim();
+      const level = hashes.length;
+      items.push({ id: slugify(label), label, level });
     }
   }
   return items;

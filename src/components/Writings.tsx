@@ -12,7 +12,7 @@ const BUTTON_CLICK_VOLUME = globalConfig.sounds.enabled
   ? globalConfig.sounds.volumes.buttonClick
   : 0;
 
-const PAGE_REVEAL_SETTLE_MS = 800;
+const PAGE_REVEAL_SETTLE_MS = 900;
 
 // ─── Highlighter "New" badge ─────────────────────────────────────────────────
 function HighlighterBadge({
@@ -55,16 +55,11 @@ const writings: WritingGroup[] = [
         href: "/blog/core-css-javascript",
         isNew: true,
       },
-    ],
-  },
-  {
-    year: "2025",
-    items: [
       {
-        title: "Notes on building things",
-        category: "Process",
-        date: "21/06",
-        href: "#",
+        title: "Love your animations again",
+        category: "Animations & Interactions",
+        date: "21/04",
+        href: "/blog/stop-worrying-love-ui-animation",
       },
     ],
   },

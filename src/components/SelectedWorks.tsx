@@ -42,40 +42,33 @@ interface WorkItem {
 
 const works: WorkItem[] = [
   {
-    title: "Dashboard",
-    subtitle: "Atlar · AI Treasury Platform",
-    year: "2024",
-    href: "#",
-    previewSrc: "/placeholder.png",
+    title: "Odyssey UI",
+    subtitle: "Animated component library",
+    year: "Ongoing",
+    href: "https://www.odysseyui.com/",
+    previewSrc: "/workImages/odyssey.png",
     badge: "Featured",
   },
   {
-    title: "Branding",
-    subtitle: "Atlar · AI Treasury Platform",
-    year: "2024",
-    href: "#",
-    previewSrc: "/placeholder.png",
+    title: "Hydra Launcher",
+    subtitle: "Core open-source contributor",
+    year: "2026",
+    href: "https://github.com/hydralauncher/hydra",
+    previewSrc: "/workImages/hydra.png",
   },
   {
-    title: "Insight Portal",
-    subtitle: "Epidemic Sound · Soundtracking",
-    year: "2023",
-    href: "#",
-    previewSrc: "/placeholder.png",
+    title: "Apollo AI Chat",
+    subtitle: "AI chat app template",
+    year: "2026",
+    href: "https://odysseyui-apollo.vercel.app/",
+    previewSrc: "/workImages/apollo.png",
   },
   {
-    title: "Platform Rework",
-    subtitle: "SAVR · Investment Platform",
-    year: "2023",
-    href: "#",
-    previewSrc: "/placeholder.png",
-  },
-  {
-    title: "Autoplay Previews",
-    subtitle: "Viaplay · Streaming Service",
-    year: "2022",
-    href: "#",
-    previewSrc: "/placeholder.png",
+    title: "Bettorr",
+    subtitle: "Game torrent search engine",
+    year: "2025",
+    href: "https://bettorr.vercel.app/",
+    previewSrc: "/workImages/bettorr.png",
   },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
@@ -137,6 +130,7 @@ export default function SelectedWorks() {
         {works.map((item, i) => (
           <Link
             key={i}
+            target="_blank"
             href={item.href}
             onClick={() => playClick()}
             onMouseEnter={(e) => handleMouseEnter(e, i)}
@@ -170,7 +164,7 @@ export default function SelectedWorks() {
         {hovered !== null && (
           <motion.div
             key={hovered}
-            className="pointer-events-none absolute right-20 z-50 w-64 overflow-hidden rounded-xl border border-border/40 bg-background shadow-2xl"
+            className="pointer-events-none absolute right-20 z-50 w-64 overflow-hidden rounded-md border border-border/40 bg-background shadow-2xl"
             style={{ top: previewY }}
             initial={{ opacity: 0, y: 8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
