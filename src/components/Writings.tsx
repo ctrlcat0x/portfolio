@@ -46,42 +46,24 @@ interface WritingGroup {
 
 const writings: WritingGroup[] = [
   {
-    year: "2025",
+    year: "2026",
     items: [
       {
         title: "On writing code with taste",
         category: "Engineering",
-        date: "14/11",
+        date: "14/01",
         href: "#",
         isNew: true,
-      },
-      {
-        title: "Design systems that breathe",
-        category: "Design",
-        date: "03/08",
-        href: "#",
-      },
-      {
-        title: "Motion as meaning",
-        category: "Motion Design",
-        date: "17/04",
-        href: "#",
       },
     ],
   },
   {
-    year: "2024",
+    year: "2025",
     items: [
       {
         title: "Notes on building things",
         category: "Process",
         date: "21/06",
-        href: "#",
-      },
-      {
-        title: "Shipping with care",
-        category: "Craft",
-        date: "09/02",
         href: "#",
       },
     ],

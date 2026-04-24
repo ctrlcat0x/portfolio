@@ -40,7 +40,6 @@ export default function RootLayout({
           </PreloaderProvider>
           {globalConfig.playfulUi.onekoFollower.enabled ? (
             <Oneko
-              bubbleEnabled={globalConfig.playfulUi.onekoFollower.bubbleEnabled}
               meow={globalConfig.playfulUi.onekoFollower.meow}
               opacity={globalConfig.playfulUi.onekoFollower.opacity}
               scale={globalConfig.playfulUi.onekoFollower.scale}

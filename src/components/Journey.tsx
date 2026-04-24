@@ -32,7 +32,7 @@ const journeyItems: JourneyItem[] = [
     year: "Present",
   },
   {
-    title: "Intern Designer",
+    title: "Frontend Intern",
     subtitle: "Innovative Application Consultants",
     year: "2025",
   },
@@ -40,11 +40,6 @@ const journeyItems: JourneyItem[] = [
     title: "Bachelor's in Computer Applications",
     subtitle: "Panjab University",
     year: "2025",
-  },
-  {
-    title: "12th Standard | Medical with Computer Science",
-    subtitle: "St. Xavier's Sr Secondary School",
-    year: "2022",
   },
 ];
 

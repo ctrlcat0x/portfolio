@@ -8,7 +8,6 @@ export const globalConfig = {
       zIndex: 10_999,
       scale: 1,
       opacity: 1,
-      bubbleEnabled: false,
       meow: false,
       followDistance: 40,
     },

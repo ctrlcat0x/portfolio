@@ -4,15 +4,19 @@ import { motion } from "framer-motion";
 import { usePreloaderDone } from "@/components/PreloaderProvider";
 import Header from "@/components/Header";
 import Bio from "@/components/Bio";
+import SelectedWorks from "@/components/SelectedWorks";
 import Writings from "@/components/Writings";
 import Journey from "@/components/Journey";
+import Books from "@/components/Books";
 import Footer from "@/components/Footer";
 
 const SECTIONS = [
   { id: "header", Component: Header },
   { id: "bio", Component: Bio },
+  { id: "selected-works", Component: SelectedWorks },
   { id: "journey", Component: Journey },
   { id: "writings", Component: Writings },
+  { id: "books", Component: Books },
   { id: "footer", Component: Footer },
 ] as const;
 
