@@ -95,8 +95,8 @@ const PATH_RECALC_MOUSE_CELLS = 2;
 const WAYPOINT_REACH_DIST = CELL_SIZE;
 
 // Chat bubble config
-const BUBBLE_DISPLAY_FRAMES = 180;
-const BUBBLE_COOLDOWN_FRAMES = 120;
+const BUBBLE_DISPLAY_FRAMES = 0;
+const BUBBLE_COOLDOWN_FRAMES = 0;
 /** Pixels between mouse samples before we treat movement as a new heading */
 const MOUSE_LOOP_MIN_STEP = 5;
 /** Total radians of cursor-heading spin to count as “going in circles” */
@@ -105,194 +105,7 @@ const MOUSE_LOOP_WINDING_TRIGGER = 6.2;
 const MOUSE_LOOP_WINDING_CAP = 13;
 /** Per logic frame decay so old spinning fades out */
 const MOUSE_LOOP_WINDING_DECAY = 0.96;
-const IDLE_MESSAGES = [
-  "I am a curious cat Myra",
-  "waiting is an art form",
-  "pixels are just tiny warm squares",
-  "I see the cursor. I simply do not care",
-  "404: motivation not found",
-  "contemplating the void...",
-  "this spot is mine now",
-  "do not disturb. cat at work",
-  "I could move. but why",
-  "every pixel is a potential nap spot",
-  "hooman scroll too much",
-  "loading personality... 12%",
-  "technically I'm working",
-  "I'm not staring. I'm supervising",
-  "existential crisis in 3... 2...",
-  "local cat does nothing, is perfect",
-  "this is my emotional support pixel",
-  "I have opinions about your CSS",
-  "the internet is my territory",
-  "your scroll speed is offensive",
-  "have you tried turning it off and on again",
-  "I don't do mornings. or afternoons",
-  "this viewport could use more cat",
-  "meow means meow",
-  "I live here now. deal with it",
-  "my attention span is... oh look a pixel",
-  "human. hooman. same thing. irrelevant.",
-  "running on 1% battery and pure spite",
-  "I accept tribute in the form of attention",
-];
-const MOVING_MESSAGES = [
-  "stalking the cursor like it's prey",
-  "tiny hunter, big ambitions",
-  "tail up, confidence higher",
-  "pat pat pat — stealth engaged",
-  "whiskers first, questions later",
-  "almost caught it... almost",
-  "following my favorite hooman",
-  "zoomies (polite edition)",
-  "this carpet has excellent traction",
-  "ear twitch: target acquired",
-  "main character energy, four paws",
-  "excuse me, I'm busy chasing vibes",
-  "the dot moved, I moved — it's science",
-  "low crouch, high drama",
-  "slink mode: activated",
-  "padding along with purpose",
-  "if I fits, I sprints",
-  "practicing my runway walk",
-  "big stretch, bigger chase",
-  "focused. fluffy. unstoppable.",
-  "trotting toward mild chaos",
-  "pounce trajectory: instinct only",
-  "hunting the invisible red dot",
-  "catch me if you can (you can't)",
-  "left paw, right paw, repeat",
-  "look at me go!",
-  "I'm not lost, I'm exploring",
-  "on my way... eventually",
-  "they call it wandering, I call it art",
-  "my paws are doing their best",
-];
-const CIRCLE_LOOP_MESSAGES = [
-  "dizzy hooman detected",
-  "are we training for the Olympics",
-  "this is not a merry-go-round",
-  "pick a direction. any direction.",
-  "my inner ear is offended",
-  "stop orbiting me like a moon",
-  "you're making the room spin",
-  "that's enough circles for one day",
-  "I'm getting motion sickness up here",
-  "chasing your own tail much?",
-  "whiskers say: please stop the loop",
-  "clockwise, counter… pick one forever",
-  "the cursor is not a hula hoop",
-  "I can't settle on a nap with this chaos",
-  "tiny circles, big drama",
-  "you're stressing the carpet out",
-  "I'm a cat not a centrifuge",
-  "round and round we do NOT go",
-  "save some spins for the washing machine",
-  "my brain is doing donuts too now",
-  "vertical tail = concerned",
-  "this is a desk not a racetrack",
-  "I need a ginger snap for my tummy",
-  "hooman.exe has entered spin cycle",
-  "one lap was cute. this is a lot.",
-  "the red dot retired. you replaced it.",
-];
-const SLEEPING_MESSAGES = [
-  "zzz...",
-  "five more minutes...",
-  "dreaming of fish",
-  "according to my calculations... nap time",
-  "meow.exe has stopped working",
-  "the mouse will wait. it always does",
-  "sleep is the best superpower",
-  "do not wake the cat",
-  "currently offline",
-  "battery at 2%",
-  "in a meeting (with my pillow)",
-  "auto-reply: gone fishing (in my dreams)",
-  "shhh... genius at rest",
-  "consciousness is overrated",
-  "nap-driven development",
-  "out of office until further notice",
-  "REM cycle in progress",
-  "do not disturb sign: activated",
-  "napping is my cardio",
-  "subconscious loading...",
-  "snore.wav playing",
-  "zoning out professionally",
-  "dreams: 100%, productivity: 0%",
-  "powered off. goodbye.",
-  "the pillow is winning",
-];
-const SCRATCHING_MESSAGES = [
-  "itchy spot right here",
-  "don't judge me",
-  "self-care is important",
-  "spa day!",
-  "found a speck... on me",
-  "adjusting the floof distribution",
-  "something tickled under the fur",
-  "scratching away a whole Tuesday",
-  "exfoliating like a pro",
-  "this is a feature not a bug",
-];
-const TIRED_MESSAGES = [
-  "I need a mass break",
-  "running on vibes and caffeine",
-  "can someone carry me",
-  "this is exhausting",
-  "why is the cursor so far",
-  "legs.exe needs an update",
-  "low power mode activated",
-  "I'm too pretty for this",
-  "yawn... where was I going",
-  "energy level: potato",
-];
-const WALL_SCRATCH_MESSAGES = [
-  "this wall has it coming",
-  "redecorating!",
-  "abstract art in progress",
-  "your walls needed texture",
-  "sharpening my claws for later",
-  "leaving my mark on this windowsill",
-  "vandalism? I call it expression",
-  "the wall started it",
-  "claiming this territory",
-  "I do my best work on walls",
-];
-const ALERT_MESSAGES = [
-  "what was that?!",
-  "I heard something!",
-  "ears: activated",
-  "threat level: probably nothing",
-  "investigating...",
-  "something moved!",
-  "on high alert!",
-  "defense mode engaged",
-  "my spidey senses are tingling",
-  "I swear I saw something",
-];
 
-const FREERUN_MESSAGES = [
-  "I don't follow rules ya silly hooman",
-  "corners are optional in my book",
-  "watch me ignore the floor plan",
-  "obstacles? you mean decorations?",
-  "rules are for dogs",
-  "I go where I please",
-  "your furniture layout is a suggestion",
-  "try to stop me hooman",
-  "boundaries are a social construct",
-  "I am the monarch of this room",
-  "shortcut time!",
-  "physics is optional... probably",
-  "forbidden spots taste better",
-  "you can't out-sneak a cat",
-  "slipping through impossible gaps",
-  "walls are just vertical carpets",
-  "catch me if you can",
-  "ghost mode: highly unsneaky",
-  "free roam, full drama",
-];
 const FREERUN_CHANCE = 0.06;
 const FREERUN_DURATION = 40;
 
@@ -1521,13 +1334,7 @@ export default function Oneko({
         return;
       }
       s.idleAnimationFrame = 0;
-      if (s.idleTime > idleFrameThreshold * 3) {
-        s.idleAnimation = "sleeping";
-        if (s.bubbleVisible) {
-          bubbleTextEl.textContent = pickFromPool(SLEEPING_MESSAGES);
-        }
-        return;
-      }
+
       const available = ["scratchSelf", "tired"];
       // 18 = position clamp boundary (16) + 2px tolerance
       // only scratch if cat is genuinely pinned against the viewport edge
@@ -1668,16 +1475,6 @@ export default function Oneko({
       s.idleTime = 0;
     };
 
-    const pickFreerunMessage = () => {
-      const s = stateRef.current;
-      let idx = Math.floor(Math.random() * FREERUN_MESSAGES.length);
-      if (idx === s.lastFreerunMsg) {
-        idx = (idx + 1) % FREERUN_MESSAGES.length;
-      }
-      s.lastFreerunMsg = idx;
-      return FREERUN_MESSAGES[idx];
-    };
-
     const enterFreerun = () => {
       const s = stateRef.current;
       s.freerunMode = true;
@@ -1685,7 +1482,6 @@ export default function Oneko({
       s.bubbleVisible = true;
       s.bubbleTimer = s.freerunDurationCfg;
       s.bubbleCooldown = 0;
-      bubbleTextEl.textContent = pickFreerunMessage();
       bubbleEl.style.opacity = "1";
     };
 
@@ -1906,40 +1702,10 @@ export default function Oneko({
       return pool[idx];
     };
 
-    const pickBubbleMessage = () => {
-      const s = stateRef.current;
-      if (s.idleAnimation === "sleeping") {
-        return pickFromPool(SLEEPING_MESSAGES);
-      }
-      if (s.customBubbleText) {
-        return s.customBubbleText;
-      }
-      if (s.idleAnimation === "tired") {
-        return pickFromPool(TIRED_MESSAGES);
-      }
-      if (s.idleAnimation === "scratchSelf") {
-        return pickFromPool(SCRATCHING_MESSAGES);
-      }
-      if (s.idleAnimation === "alert") {
-        return pickFromPool(ALERT_MESSAGES);
-      }
-      if (s.idleAnimation?.startsWith("scratchWall")) {
-        return pickFromPool(WALL_SCRATCH_MESSAGES);
-      }
-      if (s.idleTime > 0) {
-        return pickFromPool(IDLE_MESSAGES);
-      }
-      if (Math.abs(s.mouseCircleWinding) >= MOUSE_LOOP_WINDING_TRIGGER) {
-        return pickFromPool(CIRCLE_LOOP_MESSAGES);
-      }
-      return pickFromPool(MOVING_MESSAGES);
-    };
-
     const showBubble = () => {
       const s = stateRef.current;
       s.bubbleVisible = true;
       s.bubbleTimer = s.bubbleDisplayFramesCfg;
-      bubbleTextEl.textContent = pickBubbleMessage();
       bubbleEl.style.opacity = "1";
     };
 

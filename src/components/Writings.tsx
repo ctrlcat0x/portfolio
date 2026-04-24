@@ -49,10 +49,10 @@ const writings: WritingGroup[] = [
     year: "2026",
     items: [
       {
-        title: "On writing code with taste",
+        title: "Why Everyone Should Learn Core CSS and JavaScript",
         category: "Engineering",
-        date: "14/01",
-        href: "#",
+        date: "24/04",
+        href: "/blog/core-css-javascript",
         isNew: true,
       },
     ],

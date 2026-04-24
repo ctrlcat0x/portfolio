@@ -262,3 +262,104 @@
   color: var(--primary);
   background-color: var(--accent);
 }
+
+/* ─── Shiki dual-theme: activate dark tokens in dark mode ─────────────────── */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* ─── Blog prose styles ───────────────────────────────────────────────────── */
+.prose-blog {
+  & h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-top: 2.75rem;
+    margin-bottom: 0.875rem;
+    scroll-margin-top: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  & h3 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-top: 1.75rem;
+    margin-bottom: 0.625rem;
+    scroll-margin-top: 2rem;
+  }
+
+  & p {
+    font-size: 0.9375rem;
+    color: var(--muted-foreground);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  & hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  & strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  & em {
+    font-style: italic;
+  }
+
+  /* Inline code */
+  & :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.8125em;
+    background: var(--muted);
+    padding: 0.15em 0.45em;
+    border-radius: 0.3em;
+    color: var(--foreground);
+  }
+
+  & blockquote {
+    border-left: 2px solid var(--border);
+    padding-left: 1.125rem;
+    color: var(--muted-foreground);
+    font-style: italic;
+    margin: 1.75rem 0;
+  }
+
+  & ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    color: var(--muted-foreground);
+    margin-bottom: 1rem;
+  }
+
+  & ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    color: var(--muted-foreground);
+    margin-bottom: 1rem;
+  }
+
+  & li {
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    margin-bottom: 0.25rem;
+  }
+
+  & a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    transition: text-decoration-color 150ms;
+  }
+
+  & a:hover {
+    text-decoration-color: var(--foreground);
+  }
+}

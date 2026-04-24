@@ -1,0 +1,226 @@
+---
+title: "Why Everyone Should Learn Core CSS and JavaScript"
+date: "April 2026"
+description: "Frameworks are good, but they are overrated. The HTML, CSS, and JS stack just works, and here is why that matters."
+---
+
+## Frameworks Are Good. Overrated, But Good.
+
+I will say it plainly: React, Vue, Tailwind, and their cousins are useful tools. They solve real problems at scale. But we have reached a point where developers treat them as the starting line instead of the finish line. That is a mistake.
+
+A framework is a shortcut. Shortcuts are fine if you already know the terrain. If you do not, you are just lost faster.
+
+The HTML, CSS, and JavaScript stack is not legacy. It is not a stepping stone to something better. It is the runtime. Every framework compiles down to it. Every browser executes it. Understanding it directly is not nostalgia. It is engineering.
+
+---
+
+## The Stack Just Works Because It Is the Platform
+
+When you write HTML, CSS, and JS, you are writing for the platform. Not a wrapper. Not a virtual machine. The actual platform. That means zero build steps, zero dependency trees, and zero abstraction leakage. A `.html` file opens in any browser on any device from the last decade. That is not a limitation. That is power.
+
+### The Cascade Is a Feature, Not a Bug
+
+```css
+/* Base styles */
+.card {
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+}
+
+/* Variants via the cascade */
+.card.featured {
+  border-color: #2563eb;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+}
+
+.card.compact {
+  padding: 8px;
+  font-size: 14px;
+}
+```
+
+The cascade lets you model state and variation with nothing but class names and specificity. No CSS-in-JS runtime. No utility class generation step. The browser parses this in microseconds because it is native. When you understand specificity, inheritance, and the box model, you can express complex UI states with minimal code and zero overhead.
+
+### CSS Custom Properties and Runtime Theming
+
+```css
+:root {
+  --color-primary: #2563eb;
+  --color-surface: #ffffff;
+  --space-unit: 8px;
+}
+
+.card {
+  background: var(--color-surface);
+  padding: calc(var(--space-unit) * 2);
+  border: 2px solid var(--color-primary);
+}
+
+/* Change the entire theme in one line */
+[data-theme="dark"] {
+  --color-primary: #60a5fa;
+  --color-surface: #1f2937;
+}
+```
+
+CSS custom properties are live, mutable variables. Change a value on a parent element and every child updates instantly. No re-render cycle. No virtual DOM diff. The browser's style engine handles this at the compositor level, which means it is fast by default. Frameworks often reimplement this with JavaScript state and pay the performance tax.
+
+---
+
+## JavaScript: Direct Platform Access
+
+Frameworks abstract the DOM. Sometimes that helps. Sometimes it gets in the way. Core JavaScript gives you direct access to the browser's APIs without the indirection.
+
+### Event Delegation at Scale
+
+```javascript
+// One listener for a thousand items
+document.getElementById("product-list").addEventListener("click", (event) => {
+  const button = event.target.closest(".add-to-cart");
+  if (!button) return;
+
+  const productId = button.dataset.productId;
+  addToCart(productId);
+});
+```
+
+This pattern scales linearly. One listener, constant memory usage. React's synthetic event system does something similar under the hood, but if you only know React, you do not understand why. You also do not understand that `closest()` lets you handle clicks on nested elements without prop drilling or ref forwarding. The platform already solved this.
+
+### Intersection Observer for Lazy Loading
+
+```javascript
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.remove("lazy");
+      imageObserver.unobserve(img);
+    }
+  });
+});
+
+document.querySelectorAll("img[data-src]").forEach((img) => {
+  imageObserver.observe(img);
+});
+```
+
+No library needed. The browser ships `IntersectionObserver`, a native API that watches element visibility with better performance than scroll listeners. It runs off the main thread where possible and avoids layout thrashing. Frameworks wrap this in hooks and components, but the underlying API is simple, stable, and universal.
+
+### Form Handling Without the Ceremony
+
+```javascript
+const form = document.getElementById("checkout");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const data = Object.fromEntries(new FormData(form));
+  // data = { email: '...', address: '...', ... }
+
+  try {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) throw new Error(response.statusText);
+    window.location.href = "/success";
+  } catch (err) {
+    form.querySelector(".error").textContent = err.message;
+  }
+});
+```
+
+`FormData` is a built-in interface that serializes form fields automatically. `Object.fromEntries()` converts it to a plain object in one line. No controlled component state. No two hundred lines of reducer logic. The browser's form handling is robust, accessible, and well-tested across decades of use.
+
+---
+
+## Debugging Is Where Core Knowledge Pays Off
+
+Here is a real scenario. A button click in a React app does nothing. The state looks correct. The handler is bound. You spend an hour in React DevTools.
+
+The problem? A CSS rule with `pointer-events: none` on a parent div. React cannot help you there. CSS can.
+
+Another one. A form submits twice. You check your event handler, your state updates, your API calls. The issue? You attached the listener twice because you did not clean up a `useEffect`. JavaScript fundamentals, not React specifics.
+
+Frameworks add layers. Layers add places for bugs to hide. Core knowledge strips those layers away.
+
+### Reading the Computed Box
+
+```javascript
+const element = document.querySelector(".modal");
+const styles = window.getComputedStyle(element);
+
+console.log(styles.width); // "400px"
+console.log(styles.paddingLeft); // "24px"
+console.log(styles.getPropertyValue("margin-top")); // "16px"
+```
+
+When a layout breaks, `getComputedStyle` tells you exactly what the browser resolved after all the cascade, inheritance, and calculations. No guessing. No inspecting minified framework output. You ask the platform directly.
+
+---
+
+## Performance: The Stack Is Already Optimized
+
+Browsers are the most optimized runtime on earth. Billions of dollars and decades of engineering have gone into parsing HTML, computing styles, and executing JavaScript. When you add a framework, you add weight. Sometimes that weight is worth it. Often it is not.
+
+### Progressive Enhancement With Zero JavaScript
+
+```html
+<details class="accordion">
+  <summary class="accordion-trigger">Section One</summary>
+  <div class="accordion-content">
+    <p>Content here...</p>
+  </div>
+</details>
+```
+
+```css
+.accordion {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.accordion-trigger {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.accordion-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-content {
+  padding: 0 16px 16px;
+}
+
+.accordion[open] .accordion-trigger {
+  color: #2563eb;
+}
+```
+
+Zero JavaScript. Zero dependencies. The `<details>` element handles open and close state, keyboard navigation, and accessibility semantics natively. CSS styles it. This works on every browser, including mobile, with no bundle size and no hydration overhead. Frameworks often reimplement this with dozens of lines of stateful code.
+
+---
+
+## The Honest Truth
+
+I have worked with developers who could spin up a Next.js app in minutes but could not center a div without Flexbox cheatsheets. That is not a knock on them. It is a symptom of an industry that rushes to abstraction.
+
+Frameworks are good. They speed up teams, enforce consistency, and handle edge cases you should not rebuild. But they are overrated as a starting point. You do not need React to build a landing page. You do not need Tailwind to style a form. You do not need a build step to ship something useful.
+
+The HTML, CSS, and JavaScript stack just works because it is the stack. It is what browsers run. It is what users download. It is what has powered the web for thirty years and will power it for thirty more, regardless of what framework is trending.
+
+Learn the cascade. Learn the event loop. Learn how the browser paints a page and why `will-change: transform` matters. Learn that `fetch` is just a standard API and you do not need Axios. Then pick up a framework with confidence, not dependence.
+
+The web is built on HTML, CSS, and JavaScript. Everything else is just packaging.
+
+---
+
+_What is your take? Did you start with frameworks or fundamentals? Do you think the industry over-indexes on tooling?_
