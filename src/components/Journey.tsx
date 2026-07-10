@@ -32,11 +32,6 @@ const journeyItems: JourneyItem[] = [
     year: "Present",
   },
   {
-    title: "Frontend Intern",
-    subtitle: "Innovative Application Consultants",
-    year: "2025",
-  },
-  {
     title: "Bachelor's in Computer Applications",
     subtitle: "Panjab University",
     year: "2025",

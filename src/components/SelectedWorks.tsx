@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { usePreloaderDone } from "@/components/PreloaderProvider";
 import { useSound } from "@/hooks/use-sound";
 import { clickSoftSound } from "@/lib/click-soft";
@@ -42,34 +42,35 @@ interface WorkItem {
 
 const works: WorkItem[] = [
   {
-    title: "Odyssey UI",
-    subtitle: "Animated component library",
+    title: "Spider UI",
+    subtitle: "Animated React component library",
     year: "Ongoing",
-    href: "https://www.odysseyui.com/",
-    previewSrc: "/workImages/odyssey.png",
+    href: "https://spiderui.vercel.app/",
+    previewSrc: "/workImages/spiderui.png",
     badge: "Featured",
+  },
+  {
+    title: "Wallzilla",
+    subtitle: "Live wallpapers for macOS",
+    year: "2026",
+    href: "https://getwallzilla.vercel.app/",
+    previewSrc: "/workImages/wallzilla.png",
   },
   {
     title: "Hydra Launcher",
     subtitle: "Core open-source contributor",
-    year: "2026",
+    year: "2025",
     href: "https://github.com/hydralauncher/hydra",
     previewSrc: "/workImages/hydra.png",
   },
+
   {
-    title: "Apollo AI Chat",
-    subtitle: "AI chat app template",
-    year: "2026",
-    href: "https://odysseyui-apollo.vercel.app/",
-    previewSrc: "/workImages/apollo.png",
-  },
-  {
-    title: "Bettorr",
-    subtitle: "Game torrent search engine",
+    title: "Odyssey UI",
+    subtitle: "Animated component library",
     year: "2025",
-    href: "https://bettorr.vercel.app/",
-    previewSrc: "/workImages/bettorr.png",
-  },
+    href: "https://www.odysseyui.com/",
+    previewSrc: "/workImages/odyssey.png",
+  }
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -129,7 +130,7 @@ export default function SelectedWorks() {
       <div className="group/works border-t border-border">
         {works.map((item, i) => (
           <Link
-            key={i}
+            key={item.href}
             target="_blank"
             href={item.href}
             onClick={() => playClick()}

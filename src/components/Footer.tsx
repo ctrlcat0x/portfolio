@@ -79,17 +79,42 @@ function AirplaneSVG() {
 interface LinkItem {
   label: string;
   href: string;
-  icon?: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+function ExternalLinkIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      viewBox="0 0 256 256"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z" />
+    </svg>
+  );
 }
 
 const links: LinkItem[] = [
-  { label: "Resume", href: "/Sahil Rana Resume.pdf", icon: "↗" },
+  {
+    label: "Resume",
+    href: "/Sahil Rana Resume.pdf",
+    icon: ExternalLinkIcon,
+  },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/developer-sahil-rana",
-    icon: "↗",
+    icon: ExternalLinkIcon,
   },
-  { label: "x.com", href: "https://www.x.com/ctrlcat0x", icon: "↗" },
+  {
+    label: "x.com",
+    href: "https://www.x.com/ctrlcat0x",
+    icon: ExternalLinkIcon,
+  },
 ];
 
 type IndiaTime = {
@@ -195,7 +220,7 @@ export default function Footer() {
               className="flex items-center gap-2 text-sm text-foreground/80 transition-colors duration-150 hover:text-foreground"
             >
               <span>{link.label}</span>
-              <span className="text-xs">{link.icon}</span>
+              <link.icon className="size-4 shrink-0" />
             </Link>
           ))}
           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">

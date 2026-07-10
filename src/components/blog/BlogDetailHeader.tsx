@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { useSound } from "@/hooks/use-sound";
 import { clickSoftSound } from "@/lib/click-soft";
-import { Button } from "@/components/ui/button";
-import { globalConfig } from "../../../global.config";
 import type { TocItem } from "@/lib/posts";
+import { globalConfig } from "../../../global.config";
 
 interface BlogDetailHeaderProps {
   toc: TocItem[];
+}
+
+interface WindowWithLenis extends Window {
+  __lenis?: {
+    scrollTo: (target: number) => void;
+  };
 }
 
 export default function BlogDetailHeader({ toc }: BlogDetailHeaderProps) {
@@ -43,7 +49,6 @@ export default function BlogDetailHeader({ toc }: BlogDetailHeaderProps) {
   return (
     // Hidden on small screens to avoid overlap; visible at `lg` and up.
     <aside className="fixed left-10 top-20 z-10 hidden xl:flex w-56 flex-col gap-4">
-      {/* Home button: keep it left-aligned and a fixed width so it doesn't stretch to the nav width */}
       <div className="self-start">
         <Button variant="ghost" className="justify-start">
           <Link
@@ -74,7 +79,7 @@ export default function BlogDetailHeader({ toc }: BlogDetailHeaderProps) {
                 el.getBoundingClientRect().top + window.scrollY - offset;
 
               // If Lenis is available, ask it to scroll; otherwise fallback to native smooth
-              const lenis = (window as any).__lenis;
+              const lenis = (window as WindowWithLenis).__lenis;
               if (lenis && typeof lenis.scrollTo === "function") {
                 try {
                   lenis.scrollTo(targetY);

@@ -24,10 +24,10 @@ export default function Bio() {
           Currently building{" "}
           <Link
             target="_blank"
-            href="https://www.odysseyui.com/"
+            href="https://spiderui.vercel.app/"
             className="underline decoration-wavy underline-offset-3 decoration-[#f8b304]/75 hover:decoration-[#f8b304] transition-colors"
           >
-            @odysseyui
+            @spiderui
           </Link>
           . You can find me on{" "}
           <Link
