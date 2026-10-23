@@ -1,11 +1,20 @@
-import PageContent from "@/components/PageContent";
+import BlogGrid from "@/components/home/BlogGrid";
+import Footer from "@/components/home/Footer";
+import Hero from "@/components/home/Hero";
+import ProjectSlider from "@/components/home/ProjectSlider";
+import { Carousel003 } from "@/components/home/Carousel003";
+import TornTransition from "@/components/home/TornTransition";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto w-full max-w-2xl px-5 py-12 sm:py-16">
-        <PageContent />
-      </div>
+    <main id="main-content">
+      <Hero />
+      <TornTransition direction="top" />
+      <Carousel003 title="Services" />
+      <ProjectSlider />
+      <BlogGrid />
+      <TornTransition direction="bottom" />
+      <Footer />
     </main>
   );
 }

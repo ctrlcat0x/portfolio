@@ -2,84 +2,83 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-const POSTS_DIR = path.join(process.cwd(), "src/posts");
+const postsDirectory = path.join(process.cwd(), "src/posts");
 
-export interface TocItem {
-  id: string;
-  label: string;
-  /** heading level (2 for `##`, 3 for `###`) */
-  level?: number;
-}
-
-export interface PostMeta {
+export interface PostMetadata {
   slug: string;
   title: string;
   date: string;
   description: string;
 }
 
-export interface Post extends PostMeta {
+export interface Post extends PostMetadata {
   content: string;
   toc: TocItem[];
 }
 
-/**
- * Matches github-slugger's output which rehype-slug uses:
- * lowercase, remove non-alphanumeric except spaces/hyphens, collapse spaces to hyphens.
- */
-function slugify(text: string): string {
-  return text
+export interface TocItem {
+  id: string;
+  title: string;
+  level: 2 | 3;
+}
+
+function slugifyHeading(heading: string): string {
+  return heading
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-");
 }
 
-function extractToc(content: string): TocItem[] {
-  const items: TocItem[] = [];
-  for (const line of content.split("\n")) {
-    // match headings level 2 and 3, strip leading/trailing whitespace
-    const trimmedLine = line.trim();
-    const match = trimmedLine.match(/^(#{2})\s+(.+)$/);
-    if (match) {
-      const hashes = match[1];
-      const label = match[2].trim();
-      const level = hashes.length;
-      items.push({ id: slugify(label), label, level });
-    }
-  }
-  return items;
+function getTableOfContents(content: string): TocItem[] {
+  return content.split("\n").flatMap((line) => {
+    const match = line.trim().match(/^(#{2,3})\s+(.+)$/);
+    if (!match) return [];
+
+    const title = match[2].replace(/[*_`]/g, "").trim();
+    return [
+      {
+        id: slugifyHeading(title),
+        title,
+        level: match[1].length as 2 | 3,
+      },
+    ];
+  });
 }
 
-export function getAllPosts(): PostMeta[] {
-  if (!fs.existsSync(POSTS_DIR)) return [];
+function readPostFile(fileName: string): Post {
+  const slug = fileName.replace(/\.mdx$/, "");
+  const source = fs.readFileSync(path.join(postsDirectory, fileName), "utf8");
+  const { content, data } = matter(source);
+
+  return {
+    slug,
+    title: String(data.title ?? ""),
+    date: String(data.date ?? ""),
+    description: String(data.description ?? ""),
+    content,
+    toc: getTableOfContents(content),
+  };
+}
+
+export function getAllPosts(): PostMetadata[] {
+  if (!fs.existsSync(postsDirectory)) return [];
+
   return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((file) => {
-      const slug = file.replace(".mdx", "");
-      const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-      const { data } = matter(raw);
-      return {
-        slug,
-        title: (data.title as string) ?? "",
-        date: (data.date as string) ?? "",
-        description: (data.description as string) ?? "",
-      };
-    });
+    .readdirSync(postsDirectory)
+    .filter((fileName) => fileName.endsWith(".mdx"))
+    .map(readPostFile)
+    .sort((firstPost, secondPost) =>
+      secondPost.date.localeCompare(firstPost.date),
+    )
+    .map(({ content: _content, toc: _toc, ...metadata }) => metadata);
 }
 
 export function getPost(slug: string): Post | null {
-  const filePath = path.join(POSTS_DIR, `${slug}.mdx`);
+  const fileName = `${slug}.mdx`;
+  const filePath = path.join(postsDirectory, fileName);
+
   if (!fs.existsSync(filePath)) return null;
-  const raw = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(raw);
-  return {
-    slug,
-    title: (data.title as string) ?? "",
-    date: (data.date as string) ?? "",
-    description: (data.description as string) ?? "",
-    content,
-    toc: extractToc(content),
-  };
+
+  return readPostFile(fileName);
 }

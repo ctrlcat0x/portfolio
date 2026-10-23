@@ -1,49 +1,39 @@
 import { codeToHtml } from "shiki";
 import CopyButton from "./CopyButton";
 
-interface CodeBlockProps {
-  code: string;
-  language?: string;
+function escapeHtml(code: string): string {
+  return code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 export default async function CodeBlock({
   code,
   language = "text",
-}: CodeBlockProps) {
-  let html = "";
+}: {
+  code: string;
+  language?: string;
+}) {
+  let html: string;
+
   try {
     html = await codeToHtml(code, {
       lang: language,
-      themes: {
-        light: "ayu-light",
-        dark: "ayu-dark",
-      },
+      theme: "github-light",
     });
   } catch {
-    // Fallback: escape and wrap in pre/code
-    const escaped = code
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-    html = `<pre class="shiki"><code>${escaped}</code></pre>`;
+    html = `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`;
   }
 
   return (
-    <div className="group my-6 overflow-hidden rounded-xl border border-border">
-      {/* Header bar */}
-      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-2.5">
-        <span className="font-mono text-sm text-muted-foreground">
-          {language}
-        </span>
+    <figure className="code-block my-7 overflow-hidden rounded-xl border border-border">
+      <figcaption className="flex min-h-12 items-center justify-between border-b border-border bg-zinc-50 px-3 ps-4">
+        <span className="font-mono text-xs text-muted">{language}</span>
         <CopyButton code={code} />
-      </div>
-
-      {/* Highlighted code */}
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: shiki output is sanitized */}
-      <div
-        className="overflow-x-auto [&>pre]:bg-transparent! [&>pre]:p-5 [&>pre]:font-mono [&>pre]:text-[13px] [&>pre]:leading-relaxed"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </div>
+      </figcaption>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki returns escaped highlighted HTML. */}
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </figure>
   );
 }

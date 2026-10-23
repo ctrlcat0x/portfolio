@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function BlurDemo() {
   const [state, setState] = useState(0);
@@ -32,6 +32,7 @@ export default function BlurDemo() {
 
       <div className="flex gap-2">
         <button
+          type="button"
           onClick={() => setState((s) => Math.max(0, s - 1))}
           disabled={state === 0}
           className="flex-1 rounded-lg bg-muted px-4 py-2 text-sm font-medium disabled:opacity-50 hover:bg-muted/80 transition-all active:scale-95"
@@ -39,6 +40,7 @@ export default function BlurDemo() {
           Previous
         </button>
         <button
+          type="button"
           onClick={() => setState((s) => Math.min(2, s + 1))}
           disabled={state === 2}
           className="flex-1 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium disabled:opacity-50 hover:bg-primary/90 transition-all active:scale-95"

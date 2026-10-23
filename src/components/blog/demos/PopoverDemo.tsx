@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 export default function PopoverDemo() {
   const [open, setOpen] = useState(false);
@@ -11,6 +11,7 @@ export default function PopoverDemo() {
     <div className="flex flex-col gap-6">
       <div className="relative">
         <button
+          type="button"
           ref={btnRef}
           onClick={() => setOpen((s) => !s)}
           className="rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium transition-all active:scale-95"
@@ -34,6 +35,7 @@ export default function PopoverDemo() {
                 { icon: "🔔", label: "Notifications" },
               ].map((item) => (
                 <button
+                  type="button"
                   key={item.label}
                   onClick={() => setOpen(false)}
                   className="w-full px-4 py-3 text-left text-sm hover:bg-muted transition-colors flex items-center gap-3 border-b border-border/50 last:border-b-0"

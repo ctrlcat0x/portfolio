@@ -48,6 +48,7 @@ export default function EasingDemo() {
       </div>
 
       <button
+        type="button"
         onClick={() => setActive((s) => !s)}
         className="rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium transition-all active:scale-95"
       >

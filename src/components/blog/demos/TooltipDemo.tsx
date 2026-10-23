@@ -20,13 +20,16 @@ export default function TooltipDemo() {
         </p>
         <div className="flex gap-2">
           {groups.map((item) => (
-            <div
-              key={item.id}
-              className="relative"
-              onMouseEnter={() => setHoveredGroup(item.id)}
-              onMouseLeave={() => setHoveredGroup(null)}
-            >
-              <button className="rounded-lg bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-all">
+            <div key={item.id} className="relative">
+              <button
+                type="button"
+                aria-label={item.label}
+                onFocus={() => setHoveredGroup(item.id)}
+                onBlur={() => setHoveredGroup(null)}
+                onMouseEnter={() => setHoveredGroup(item.id)}
+                onMouseLeave={() => setHoveredGroup(null)}
+                className="rounded-lg bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-all"
+              >
                 {item.icon}
               </button>
 

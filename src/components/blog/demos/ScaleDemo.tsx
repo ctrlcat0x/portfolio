@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function ScaleDemo() {
   const [open, setOpen] = useState(false);
@@ -10,6 +10,7 @@ export default function ScaleDemo() {
     <div className="w-full">
       <div className="mb-4 flex items-center gap-2">
         <button
+          type="button"
           onClick={() => setOpen((s) => !s)}
           className="rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium transition-all active:scale-95"
         >
